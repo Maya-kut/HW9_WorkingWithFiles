@@ -54,12 +54,12 @@ public class SelenideFilesTest {
             try (ZipInputStream zis = new ZipInputStream(is)) {
                 ZipEntry zipEntry;
                 while ((zipEntry = zis.getNextEntry()) != null) {
-                    if (zipEntry.getName().endsWith(".pdf")) {
+                    if (zipEntry.getName().endsWith(".xls")) {
                         XLS xls = new XLS(zis);
-                        Assertions.assertEquals("Тестовый PDF-документ\n" +
-                                "Здравствуйте!\n" +
-                                "Это документ в формате PDF, который был создан для тестирования загрузки файлов.\n" +
-                                "Никакой полезной информации он не несёт.",pdf.text);
+                        String firstString = xls.excel.getSheetAt(0).getRow(1).getCell(1).getStringCellValue();
+                        String secondString = xls.excel.getSheetAt(0).getRow(3).getCell(4).getStringCellValue();
+                        Assertions.assertEquals("Проверка строки в xl файле", firstString);
+                        Assertions.assertEquals("проверка ещё одной строки в xl файле", secondString);
                     }
                 }
             }
