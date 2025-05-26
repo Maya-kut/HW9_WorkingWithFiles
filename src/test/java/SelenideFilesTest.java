@@ -87,7 +87,7 @@ public class SelenideFilesTest {
                 ZipEntry zipEntry;
                 while ((zipEntry = zis.getNextEntry()) != null) {
                     if (zipEntry.getName().endsWith(".csv")) {
-                        CSVReader reader = new CSVReader(';', new InputStreamReader(zis));
+                        CSVReader reader = new CSVReader(new InputStreamReader(zis), ';');
                         List<String[]> data = reader.readAll();
                         Assertions.assertEquals(2, data.size());
                         Assertions.assertArrayEquals(new String[]{"CN001;OU001;iivanova@company.ru;88002000600;131;iivanova;iivanova"}, data.get(0));
