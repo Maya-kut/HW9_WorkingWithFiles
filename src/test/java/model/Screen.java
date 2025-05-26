@@ -1,6 +1,6 @@
-package Model;
+package model;
 
-public class Viewport {
+public class Screen {
     private int width;
 
     public int getWidth() {
@@ -20,7 +20,5 @@ public class Viewport {
     public void setHeight(int height) {
         this.height = height;
     }
+
 }
-
-
-

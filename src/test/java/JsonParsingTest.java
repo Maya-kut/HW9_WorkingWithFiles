@@ -1,4 +1,4 @@
-import Model.ModelPhone;
+import model.ModelPhone;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

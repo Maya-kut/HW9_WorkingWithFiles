@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 public class ModelPhone {
     private String model;
