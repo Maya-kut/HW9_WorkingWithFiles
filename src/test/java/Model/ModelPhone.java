@@ -47,7 +47,7 @@ public class ModelPhone {
     public void setMobile(boolean mobile) {
         isMobile = mobile;
     }
-    public boolean isHasTouch() {
+    public boolean HasTouch() {
         return hasTouch;
     }
     public void setHasTouch(boolean hasTouch) {
