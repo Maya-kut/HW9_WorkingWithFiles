@@ -1,7 +1,9 @@
 
 import com.codeborne.pdftest.PDF;
 import com.codeborne.xlstest.XLS;
+import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
+import com.opencsv.CSVReaderBuilder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,7 +19,7 @@ public class SelenideFilesTest {
     private final ClassLoader cl = SelenideFilesTest.class.getClassLoader();
 
     @Test
-    @DisplayName("Проверка наличия файлов в архиве")
+    @DisplayName("Показ имен файлов в архиве")
     public void zipFileParsingTest() throws Exception {
         try (ZipInputStream zis = new ZipInputStream(
                 Objects.requireNonNull(cl.getResourceAsStream("Archive.zip"))
@@ -31,7 +33,7 @@ public class SelenideFilesTest {
     }
 
     @Test
-    @DisplayName("Проверка  pdf файла")
+    @DisplayName("Проверка pdf файла")
     public void pdfFileParsingTest() throws Exception {
         try (InputStream is = cl.getResourceAsStream("Archive.zip")) {
             assert is != null;
@@ -40,10 +42,11 @@ public class SelenideFilesTest {
                 while ((zipEntry = zis.getNextEntry()) != null) {
                     if (zipEntry.getName().endsWith(".pdf")) {
                         PDF pdf = new PDF(zis);
-                        Assertions.assertEquals("Тестовый PDF-документ\n" +
-                                "Здравствуйте!\n" +
-                                "Это документ в формате PDF, который был создан для тестирования загрузки файлов.\n" +
-                                "Никакой полезной информации он не несёт.", pdf.text);
+                        Assertions.assertEquals("Тестовый PDF-документ \n" +
+                                " \n" +
+                                "Здравствуйте! \n" +
+                                "Это документ в формате PDF, который был создан для тестирования загрузки файлов. \n" +
+                                "Никакой полезной информации он не несёт. \n", pdf.text);
                     }
                 }
             }
@@ -87,7 +90,8 @@ public class SelenideFilesTest {
                 ZipEntry zipEntry;
                 while ((zipEntry = zis.getNextEntry()) != null) {
                     if (zipEntry.getName().endsWith(".csv")) {
-                        CSVReader reader = new CSVReader(new InputStreamReader(zis), ';');
+                        CSVReader reader = new CSVReader(new InputStreamReader(zis));
+//                        CSVReader reader = new CSVReader(new InputStreamReader(zis), new CSVParserBuilder().withSeparator(';').build());
                         List<String[]> data = reader.readAll();
                         Assertions.assertEquals(2, data.size());
                         Assertions.assertArrayEquals(new String[]{"CN001;OU001;iivanova@company.ru;88002000600;131;iivanova;iivanova"}, data.get(0));
