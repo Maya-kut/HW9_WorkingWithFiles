@@ -95,8 +95,8 @@ public class SelenideFilesTest {
                         CSVReader reader = new CSVReaderBuilder(new InputStreamReader(zis)).withCSVParser(csvParser).build();
                         List<String[]> data = reader.readAll();
                         Assertions.assertEquals(2, data.size());
-                        Assertions.assertArrayEquals(new String[]{"CN001","OU001","iivanova@company.ru","88002000600","131","iivanova","iivanova"}, data.get(0));
-                        Assertions.assertArrayEquals(new String[]{"CN002","OU002","ksergeev@company.ru","","201","ksergeev","ksergeev"}, data.get(1));
+                        Assertions.assertArrayEquals(new String[]{"CN001", "OU001", "iivanova@company.ru", "88002000600", "131", "iivanova", "iivanova"}, data.get(0));
+                        Assertions.assertArrayEquals(new String[]{"CN002", "OU002", "ksergeev@company.ru", "", "201", "ksergeev", "ksergeev"}, data.get(1));
                     }
                 }
             }
